@@ -1,0 +1,62 @@
+{
+    "resource": "/users/authenticate",
+    "path": "/users/authenticate",
+    "httpMethod": "POST",
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "cache-control": "no-cache",
+        "CloudFront-Forwarded-Proto": "https",
+        "CloudFront-Is-Desktop-Viewer": "true",
+        "CloudFront-Is-Mobile-Viewer": "false",
+        "CloudFront-Is-SmartTV-Viewer": "false",
+        "CloudFront-Is-Tablet-Viewer": "false",
+        "CloudFront-Viewer-Country": "AU",
+        "Content-Type": "text/plain",
+        "Host": "krmr6po0p5.execute-api.us-east-1.amazonaws.com",
+        "Postman-Token": "ad310512-b02f-4ce2-a1ce-d24f0a15eec2",
+        "User-Agent": "PostmanRuntime/6.2.5",
+        "Via": "1.1 4ad79fb27f97920699ae3d6638cb5a33.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "KFP_GVr-o6ZYBV8MRpAd_B_gNaYnwE4IGotK9dFXe1IRefIZ2F2b2Q==",
+        "X-Amzn-Trace-Id": "Root=1-5a599a08-3141d9f35d4fbc9f7783c1f8",
+        "x-api-key": "T0S6jXSytj6DbKHIiGaMQBU4feJUXu41NnTGCEfj",
+        "X-Forwarded-For": "144.138.122.145, 54.240.152.59",
+        "X-Forwarded-Port": "443",
+        "X-Forwarded-Proto": "https"
+    },
+    "queryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+        "requestTime": "13/Jan/2018:05:32:56 +0000",
+        "path": "/dev/users/authenticate",
+        "accountId": "421872922966",
+        "protocol": "HTTP/1.1",
+        "resourceId": "nkc4aq",
+        "stage": "dev",
+        "requestTimeEpoch": 1515821576117,
+        "requestId": "3560cf4d-f823-11e7-a34b-ed6a1c96fd59",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "144.138.122.145",
+            "apiKey": "T0S6jXSytj6DbKHIiGaMQBU4feJUXu41NnTGCEfj",
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": "PostmanRuntime/6.2.5",
+            "user": null
+        },
+        "resourcePath": "/users/authenticate",
+        "httpMethod": "POST",
+        "apiId": "krmr6po0p5"
+    },
+    "body": { 
+        "email": "sriks6504@gmail.com",
+        "token": "an.unique.token"
+    },
+    "isBase64Encoded": false
+}

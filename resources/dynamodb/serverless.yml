@@ -1,0 +1,58 @@
+# Resource only serverless file for dynamodb
+#
+service: dynamodb
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'test'}
+  region: us-east-1
+
+functions:
+
+resources:
+  # For syntax refer https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table-syntax
+  Resources:
+    otpTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        # Ex: dev.myflix.otp which is deployed to dev environment.   
+        TableName: ${self:provider.stage}.myflix.otp
+        AttributeDefinitions: 
+          - 
+            AttributeName: token
+            AttributeType: S
+        KeySchema: 
+          - 
+            AttributeName: token
+            KeyType: HASH
+        TimeToLiveSpecification:
+            AttributeName: ttl
+            Enabled: true
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    listsTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: ${self:provider.stage}.myflix.lists
+        AttributeDefinitions: 
+          - 
+            AttributeName: itemId
+            AttributeType: S
+        KeySchema: 
+          - 
+            AttributeName: itemId
+            KeyType: HASH
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+
+  Outputs:
+    OtpTable:
+      Value:
+        Fn::GetAtt: [ otpTable, Arn ]
+    ListTable:
+      Value:
+        Fn::GetAtt: [ listsTable, Arn ]
+        
