@@ -1,9 +1,9 @@
-var shortid = require('shortid')
-var OTP = require('otp')
-var DB = require('./db.js')
-var EmailRequest = require('./emailRequest')
-var Ajv = require('ajv')
-var ajv = new Ajv({allErrors: true})
+const EmailRequest = require('./emailRequest')
+const OTP = require('otp')
+const DB = require('./db.js')
+const httpStatusCodes = require('http-status-codes')
+const Ajv = require('ajv')
+const ajv = new Ajv({allErrors: true})
 const authenticateUserValidationSchema = require('./validations/authenticateUser.json')
 
 class Authentication {
@@ -44,19 +44,25 @@ class Authentication {
                 this.email = body.email
                 this.token = body.token                
             } else {
-                console.log('validation error')
-                reject(ajv.errorsText(ajv.errors))
+                var reason = ajv.errorsText(ajv.errors)
+                reject({
+                    statusCode: httpStatusCodes.BAD_REQUEST,
+                    reason: reason 
+                })
                 return
             }
 
             this.addOTP()
                 .then(otp => {
-                    console.log('addOTP ... ' + otp)
+                    console.log('addOTP ... ')
                     return this.sendVerification(otp)
                 })
                 .then(result => {
                     console.log('sendVerification ... ok')
-                    resolve({})
+                    resolve({
+                        statusCode: httpStatusCodes.CREATED,
+                        result: {}
+                    })
                 })
                 .catch(err => {
                     console.error(err)

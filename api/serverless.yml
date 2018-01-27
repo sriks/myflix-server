@@ -39,5 +39,5 @@ functions:
 
 # Test our serverless app locally
 plugins:
-  - serverless-plugin-bespoken
+  - serverless-offline
 

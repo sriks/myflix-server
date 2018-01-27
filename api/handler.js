@@ -1,36 +1,38 @@
 'use strict'
 const AWS = require('aws-sdk')
-const ApiGatewayResponse = require('lambda-api-gateway-response')
 const Users = require('./users/users.js')
 AWS.config.update({region: process.env.REGION});
 
 var didFinish = function(error, result, callback) {
-  console.log('errr:'+error)
-  let body
-  let statusCode
-  if (error) {
-      statusCode = 400
-      body = {
-        ok: false,
-        error: JSON.stringify(error)
-      }
-  } else {
-      statusCode = 200
-      body = {
-        ok: true,
-        result: result
-      }
-  }
+    let body
+    let statusCode
+    if (error) {
+        statusCode = error.statusCode
+        body = {
+          ok: false,
+          error: {
+            reason: error.reason
+          }
+        }
+    } else {
+        statusCode = result.statusCode
+        body = {
+          ok: true,
+          result: result.result
+        }
+    }
 
-  console.log(JSON.stringify(body))
-  new ApiGatewayResponse(callback)
-      .status(statusCode)
-      .headers({
-        'Content-Type': 'application/json',
-        'access-control-allow-origin': '*'
-      })
-      .body(body)
-      .send();
+    const apiResponse = {
+      statusCode: statusCode,
+      headers: {
+        "Content-Type": "application/json",
+        "access-control-allow-origin": "*"
+      },
+      body: body
+    }
+
+    console.log('finalresponse:'+apiResponse)
+    callback(null, apiResponse)
 }
     
 var handleCompletion = function(aPromise, callback) {
@@ -39,7 +41,6 @@ var handleCompletion = function(aPromise, callback) {
         didFinish(null, response, callback)
       })
       .catch(err => {
-        console.log('failed with err'+err)
         didFinish(err, null, callback)
       })
 }

@@ -1,8 +1,7 @@
 // Parses body from proxy reponse structure.
 const body = function(response) {
     // body is a string type in response
-    let resJSON = JSON.parse(response.text)
-    let body = JSON.parse(resJSON.body)
+    let body = JSON.parse(response.text)
     return body
 }
 
