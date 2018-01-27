@@ -28,10 +28,10 @@ var didFinish = function(error, result, callback) {
         "Content-Type": "application/json",
         "access-control-allow-origin": "*"
       },
-      body: body
+      body: JSON.stringify(body)
     }
 
-    console.log('finalresponse:'+apiResponse)
+    console.log('finalresponse:'+  JSON.stringify(apiResponse))
     callback(null, apiResponse)
 }
     
