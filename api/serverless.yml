@@ -24,7 +24,18 @@ provider:
   region: us-east-1
   # Imports all keys and values as service wide env variables.
   environment: ${self:custom.env}
-    
+  apiKeys:
+    # This is the expected key name
+    - ${opt:stage}-myflix-accesskey
+  usagePlan:
+    description: Usage plan for myflix api service
+    quota:
+      limit: 4000
+      offset: 2
+      period: MONTH
+    throttle:
+      burstLimit: 200
+      rateLimit: 100  
 custom: 
   env: ${file(./env.json):${self:provider.stage}}
 
@@ -37,6 +48,14 @@ functions:
           method: post
           private: false
 
+  authorizeUser:
+      handler: handler.authorizeUser
+      events:
+      - http:
+          path: users/authorize
+          method: post
+          private: false
+      
 # Test our serverless app locally
 plugins:
   - serverless-offline

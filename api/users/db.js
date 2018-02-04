@@ -40,7 +40,36 @@ class DBOperations {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve()
+                    resolve(otpEntry)
+                }
+            })
+        })
+    }
+
+    // If valid, returns the db item. Else an error. 
+    vaidateOTPEntry(otpEntry) {
+        return new Promise((resolve, reject) => {
+            const docClient = new AWS.DynamoDB.DocumentClient()
+            // Try deleting item matching all attirbutes. Deleted item is returned. 
+            var params = {
+                TableName : this.tableName,
+                Key: {
+                    "token": otpEntry.token
+                },
+                ConditionExpression:"otp = :otp AND email = :email",
+                ExpressionAttributeValues: {
+                    ":otp": otpEntry.otp,
+                    ":email": otpEntry.email
+                },
+                ReturnValues:"ALL_OLD"
+            }
+            docClient.delete(params, function(err, data) {
+                if (err) {
+                    console.error('Unable to delete item. Error JSON:', JSON.stringify(err, null, 2))
+                    reject(new Error('Invalid otp or no otp found'))
+                } else {
+                    console.log('success')
+                    resolve(data.Attributes)
                 }
             })
         })

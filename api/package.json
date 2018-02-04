@@ -4,8 +4,9 @@
   "description": "MyFlix API",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Testing environment: local\" && TEST_URL=http://localhost:3000 mocha --timeout 10000",
-    "test-dev": "echo \"Testing environment: dev\" && TEST_URL=https://krmr6po0p5.execute-api.us-east-1.amazonaws.com/dev mocha --timeout 6000"
+    "test": "echo \"Testing environment: local\" && STAGE=test TEST_URL=http://localhost:3000 mocha --timeout 10000",
+    "test-test": "echo \"Testing environment: test\" && STAGE=test TEST_URL=https://h9ykj4rnk7.execute-api.us-east-1.amazonaws.com/test mocha --timeout 6000",
+    "test-dev": "echo \"Testing environment: dev\" && STAGE=dev TEST_URL=https://krmr6po0p5.execute-api.us-east-1.amazonaws.com/dev mocha --timeout 6000"
   },
   "author": "Srikanth Sombhatla",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "mocha": "^4.1.0",
-    "serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.16.0",
+    "uuid": "^3.2.1"
   }
 }

@@ -53,8 +53,19 @@ var convertEventBodyToJSON = function(event) {
     return event
 }
 
-module.exports.authenticateUser = (event, context, callback) => {
+const authenticateUser = function(event, context, callback) {
     event = convertEventBodyToJSON(event)
     console.log('input event:'+JSON.stringify(event))
     handleCompletion(Users.authenticate(event), callback)
+}
+
+const authorizeUser = function(event, context, callback) {
+    event = convertEventBodyToJSON(event)
+    console.log('input event:'+JSON.stringify(event))
+    handleCompletion(Users.authorize(event), callback)
+}
+
+module.exports = {
+    authenticateUser: authenticateUser,
+    authorizeUser: authorizeUser
 }

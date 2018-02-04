@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "required": ["email", "token", "otp"],
+    "properties": {
+      "email": {"type": "string", "format": "email"},
+      "token": {"type": "string", "format": "uuid"},
+      "otp": {"type": "string", "minLength": 6, "maxLength": 6}
+    }
+}
