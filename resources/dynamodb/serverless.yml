@@ -29,8 +29,8 @@ resources:
             AttributeName: ttl
             Enabled: true
         ProvisionedThroughput: 
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
     listsTable:
       Type: AWS::DynamoDB::Table
@@ -45,8 +45,8 @@ resources:
             AttributeName: itemId
             KeyType: HASH
         ProvisionedThroughput: 
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
   Outputs:
     OtpTable:
