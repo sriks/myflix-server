@@ -30,8 +30,18 @@ const generateTitleId = function() {
     return uuidv1()
 }
 
+const generateEmailId = function() {
+    return uuidv1() + '@test.com'
+}
+
+const generateId = function() {
+    return uuidv1()
+}
+
 module.exports = {
     body: body,
     addTestOTPEntry: addTestOTPEntry,
-    generateTitleId: generateTitleId
+    generateTitleId: generateTitleId,
+    generateEmailId: generateEmailId,
+    generateId: generateId
 }
