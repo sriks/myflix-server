@@ -24,7 +24,7 @@ class Authentication {
         return new Promise((resolve, reject) => {
             const otpCode = OTP().totp();
             const otpEntry = new DB.OTPEntry(otpCode, this.email, this.token)
-            const dbOp = new DB.DBOperations()
+            const dbOp = new DB.OTP()
             dbOp.addOTPEntry(otpEntry)
             .then(() => {
                 resolve(otpCode)

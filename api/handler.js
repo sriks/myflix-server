@@ -1,6 +1,6 @@
 'use strict'
-AWS.config.update({region: process.env.REGION})
 const AWS = require('aws-sdk')
+AWS.config.update({region: process.env.REGION})
 const Users = require('./users/users.js')
 const Titles = require('./titles/titles.js')
 

@@ -23,7 +23,7 @@ class Authorization {
                 return
             }
             const otpEntry = new DB.OTPEntry(body.otp, body.email, body.token)
-            const dbOp = new DB.DBOperations()
+            const dbOp = new DB.OTP()
             dbOp.vaidateOTPEntry(otpEntry)
                 .then((entry) => {
                     console.log('deleted entry:' + JSON.stringify(entry))

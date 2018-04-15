@@ -22,7 +22,7 @@ const body = function(response) {
 const addTestOTPEntry = function() {
     const otpCode = OTP().totp();
     const otpEntry = new DB.OTPEntry(otpCode, 'testentry@test.com', uuidv1())
-    const dbOp = new DB.DBOperations()
+    const dbOp = new DB.OTP()
     return dbOp.addOTPEntry(otpEntry)
 }
 
