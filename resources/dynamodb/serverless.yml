@@ -32,6 +32,22 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
 
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: ${self:provider.stage}.myflix.users
+        AttributeDefinitions: 
+          - 
+            AttributeName: email
+            AttributeType: S
+        KeySchema: 
+          - 
+            AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
     titlesTable:
       Type: AWS::DynamoDB::Table
       Properties: 
@@ -57,8 +73,11 @@ resources:
   Outputs:
     OtpTable:
       Value:
-        Fn::GetAtt: [ otpTable, Arn ]
-    ListTable:
+        Fn::GetAtt: [otpTable, Arn]
+    UsersTable:
       Value:
-        Fn::GetAtt: [ titlesTable, Arn ]
+        Fn::GetAtt: [usersTable, Arn]    
+    TitlesTable:
+      Value:
+        Fn::GetAtt: [titlesTable, Arn]
         
