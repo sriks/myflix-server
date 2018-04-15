@@ -55,7 +55,15 @@ functions:
           path: users/authorize
           method: post
           private: false
-      
+
+  addOrUpdateTitle:
+      handler: handler.addOrUpdateTitle
+      events:
+      - http:
+          path: titles
+          method: post
+          private: false  
+
 # Test our serverless app locally
 plugins:
   - serverless-offline

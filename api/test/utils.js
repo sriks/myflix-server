@@ -26,7 +26,12 @@ const addTestOTPEntry = function() {
     return dbOp.addOTPEntry(otpEntry)
 }
 
+const generateTitleId = function() {
+    return uuidv1()
+}
+
 module.exports = {
     body: body,
-    addTestOTPEntry: addTestOTPEntry
+    addTestOTPEntry: addTestOTPEntry,
+    generateTitleId: generateTitleId
 }

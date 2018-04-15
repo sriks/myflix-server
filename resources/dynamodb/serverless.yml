@@ -32,18 +32,24 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
 
-    listsTable:
+    titlesTable:
       Type: AWS::DynamoDB::Table
       Properties: 
-        TableName: ${self:provider.stage}.myflix.lists
+        TableName: ${self:provider.stage}.myflix.titles
         AttributeDefinitions: 
           - 
-            AttributeName: itemId
+            AttributeName: titleId
+            AttributeType: S
+          - 
+            AttributeName: updatedAt
             AttributeType: S
         KeySchema: 
           - 
-            AttributeName: itemId
+            AttributeName: titleId
             KeyType: HASH
+          - 
+            AttributeName: updatedAt
+            KeyType: RANGE
         ProvisionedThroughput: 
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
@@ -54,5 +60,5 @@ resources:
         Fn::GetAtt: [ otpTable, Arn ]
     ListTable:
       Value:
-        Fn::GetAtt: [ listsTable, Arn ]
+        Fn::GetAtt: [ titlesTable, Arn ]
         

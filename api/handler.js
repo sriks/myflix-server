@@ -1,7 +1,8 @@
 'use strict'
+AWS.config.update({region: process.env.REGION})
 const AWS = require('aws-sdk')
 const Users = require('./users/users.js')
-AWS.config.update({region: process.env.REGION});
+const Titles = require('./titles/titles.js')
 
 var didFinish = function(error, result, callback) {
     let body
@@ -65,7 +66,14 @@ const authorizeUser = function(event, context, callback) {
     handleCompletion(Users.authorize(event), callback)
 }
 
+const addOrUpdateTitle = function(event, context, callback) {
+    event = convertEventBodyToJSON(event)
+    console.log('input event:'+JSON.stringify(event))
+    handleCompletion(Titles.addOrUpdate(event), callback)
+}
+
 module.exports = {
     authenticateUser: authenticateUser,
-    authorizeUser: authorizeUser
+    authorizeUser: authorizeUser,
+    addOrUpdateTitle: addOrUpdateTitle
 }
