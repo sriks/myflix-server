@@ -1,0 +1,17 @@
+Local testing using serverless offline. Firstly make sure sls offline is started. 
+sls offline start --stage test
+npm test
+# This auto restarts the server on any changes. 
+
+Deploy:
+sls deploy --stage <stage-name>
+sls deploy --stage test
+for debugging export SLS_DEBUG=false 
+
+On authorization success, send back user info as JWT. It contains
+required: email, userId (generated), publicUserId (generated), createdAt
+optional: fullName, photoUrl
+
+Client saves and sends this JWT with every request that requires user identification. 
+Server validates claims and process the request for the user.
+
