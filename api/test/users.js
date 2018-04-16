@@ -71,8 +71,9 @@ describe('Users', () => {
                     expect(body, 'all keys').to.include.all.keys('ok', 'result')
                     expect(body.ok).to.be.true
                     let result = body.result
-                    expect(result, 'result all keys').to.include.all.keys('accessKey')
+                    expect(result, 'result all keys').to.include.all.keys('accessKey', 'token')
                     expect(result.accessKey, 'access key is not empty').to.be.not.empty
+                    expect(result.token, 'token is not empty').to.be.not.empty
                     done()
                 })
             })

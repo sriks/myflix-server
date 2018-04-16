@@ -35,7 +35,6 @@ class OTPDBOperations {
                     'ttl': ttl
                 }
             };
-            console.log('adding otp entry...')
             docClient.put(params, function(err, data) {
                 if (err) {
                     reject(err);
