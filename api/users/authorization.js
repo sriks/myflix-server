@@ -47,16 +47,18 @@ class Authorization {
                      }
                     // Uses default HS256
                     const jwtToken = jwt.sign(payload, process.env.JWT_KEY)
-                    return jwtToken
+                    return {userData: userData, jwtToken: jwtToken} 
                 })
-                .then(jwtToken => 
+                .then((result) => {
+                    console.log('result is '+JSON.stringify(result))
                     resolve({
                         statusCode: httpStatusCodes.OK,
                         result: {
                             accessKey: process.env.MFX_ACCESS_KEY,
-                            token: jwtToken
+                            token: result['jwtToken'],
+                            user: result['userData']
                         }
-                    })
+                    })}
                 )
                 .catch((err) => {
                     console.error('failed with error: '+err)

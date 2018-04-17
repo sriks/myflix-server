@@ -9,6 +9,13 @@ class UserData {
         this.fullName = undefined
         this.updatedAt = undefined
     }
+
+    responseJson() {
+        // We can remove unwanted keys which dont have to be part of response. 
+        return _.mapObject(userData, function(val, key) {
+            return val
+        })
+    }
 }
 
 class UsersDBOperations {
